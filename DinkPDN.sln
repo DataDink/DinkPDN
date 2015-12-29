@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "DinkPDN.Common", "DinkPDN.Common\DinkPDN.Common.shproj", "{AF2EDC76-C2C1-4858-854C-EDFBA8F5F8B3}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "DinkPDN.Effects.Simple", "DinkPDN.Effects.Simple\DinkPDN.Effects.Simple.shproj", "{F0963C91-A917-494A-A6B8-CA13B285CF15}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ColorCut", "ColorCut\ColorCut.csproj", "{6ED22191-2C6E-4A24-81FF-C04AAF54C9D8}"
+EndProject
+Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		DinkPDN.Common\DinkPDN.Common.projitems*{af2edc76-c2c1-4858-854c-edfba8f5f8b3}*SharedItemsImports = 13
+		DinkPDN.Common\DinkPDN.Common.projitems*{6ed22191-2c6e-4a24-81ff-c04aaf54c9d8}*SharedItemsImports = 4
+		DinkPDN.Effects.Simple\DinkPDN.Effects.Simple.projitems*{6ed22191-2c6e-4a24-81ff-c04aaf54c9d8}*SharedItemsImports = 4
+		DinkPDN.Effects.Simple\DinkPDN.Effects.Simple.projitems*{f0963c91-a917-494a-a6b8-ca13b285cf15}*SharedItemsImports = 13
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6ED22191-2C6E-4A24-81FF-C04AAF54C9D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6ED22191-2C6E-4A24-81FF-C04AAF54C9D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6ED22191-2C6E-4A24-81FF-C04AAF54C9D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6ED22191-2C6E-4A24-81FF-C04AAF54C9D8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
