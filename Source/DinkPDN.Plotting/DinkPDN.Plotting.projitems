@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>1d2b493d-ee11-46c2-8105-cd53dafbb491</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>DinkPDN.Plotting</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)X2D\Edge.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)X2D\Vertice.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)X3D\Edge.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)X3D\Vertice.cs" />
+  </ItemGroup>
+</Project>

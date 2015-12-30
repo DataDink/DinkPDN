@@ -5,6 +5,7 @@ using PaintDotNet.IndirectUI;
 using PaintDotNet.PropertySystem;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Reflection;
@@ -30,7 +31,7 @@ namespace DinkPDN.Effects.Simple
         protected ConfigurableEffect(string name, Image image, string menu) : base(name, image, menu) { }
     }
 
-    public abstract class BaseConfigurableEffect : PropertyBasedEffect
+    public abstract class BaseConfigurableEffect : PropertyBasedEffect, INotifyPropertyChanged
     {
         private readonly Type Type;
         private readonly Dictionary<PropertyInfo, ConfigurableAttribute> Properties;
@@ -51,11 +52,23 @@ namespace DinkPDN.Effects.Simple
         {
             foreach (var kvp in Properties) {
                 var prop = kvp.Key;
-                var value = newToken.GetProperty(prop.Name).Value;
-                prop.SetValue(this, value);
+                var oldValue = prop.GetValue(this);
+                var newValue = newToken.GetProperty(prop.Name).Value;
+                prop.SetValue(this, newValue);
+                if (oldValue != newValue) {
+                    prop.SetValue(this, newValue);
+                    OnPropertyChanged(prop, oldValue, newValue);
+                }
             }
             base.OnSetRenderInfo(newToken, dstArgs, srcArgs);
         }
+
+        protected virtual void OnPropertyChanged(PropertyInfo property, object oldValue, object newValue)
+        {
+            if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs(property.Name));
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         protected override ControlInfo OnCreateConfigUI(PropertyCollection props)
         {
@@ -86,8 +99,11 @@ namespace DinkPDN.Effects.Simple
                 }
             }
 
+            OnReady();
             return control;
         }
+
+        protected virtual void OnReady() { }
 
         protected abstract class ConfigurableAttribute : Attribute
         {

@@ -1,8 +1,6 @@
 ﻿using DinkPDN.Effects.Simple;
 using PaintDotNet;
 using System;
-using PaintDotNet.IndirectUI;
-using PaintDotNet.PropertySystem;
 
 namespace ColorCut
 {
@@ -13,12 +11,11 @@ namespace ColorCut
         private double BgShade { get; set; } 
         private ColorBgra BgNormal { get; set; }
 
-        protected override ControlInfo OnCreateConfigUI(PropertyCollection props)
+        protected override void OnReady()
         {
             BgColor = EnvironmentParameters.SecondaryColor;
             BgShade = GetShade(BgColor);
             BgNormal = Normalize(BgColor);
-            return base.OnCreateConfigUI(props);
         }
 
         [ConfigurableInt(
