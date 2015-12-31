@@ -14,7 +14,7 @@ namespace ColorCut
         protected override void OnReady()
         {
             BgColor = EnvironmentParameters.SecondaryColor;
-            BgShade = GetShade(BgColor);
+            BgShade = BgColor.ToColor().GetBrightness();
             BgNormal = Normalize(BgColor);
         }
 
@@ -25,23 +25,21 @@ namespace ColorCut
             MicroStep = 1, SmallStep = 8, LargeStep = 16)]
         public int ColorThreshold { get; set; }
 
-        [ConfigurableInt(
+        [ConfigurableDouble(
             Name = "Shade Threshold",
             Description = "The max deviation in shade from the background a pixel can have to be affected.",
-            Default = 256, Min = 0, Max = 256,
-            MicroStep = 1, SmallStep = 8, LargeStep = 16)]
-        public int ShadeThreshold { get; set; }
+            Default = 1d)]
+        public double ShadeThreshold { get; set; }
 
         [ConfigurableDouble(
             Name = "Alpha Falloff",
             Description = "The ratio at which the alpha channel will be tapered off.",
-            Default = 0.5d, Min = 0d, Max = 1d,
-            MicroStep = .001d, SmallStep = .01d, LargeStep = .1d, Precision = 3)]
+            Default = 0.5d)]
         public double AlphaFalloff { get; set; }
 
         protected override ColorBgra RenderPixel(int x, int y, ColorBgra initial, Surface source)
         {
-            var shade = GetShade(initial);
+            var shade = initial.ToColor().GetBrightness();
             if (Math.Abs(shade - BgShade) > ShadeThreshold) return initial;
 
             var norm = Normalize(initial);
@@ -58,11 +56,6 @@ namespace ColorCut
                     Math.Abs(BgColor.B - initial.B)))
                 * (1d - AlphaFalloff)));
             return ColorBgra.FromBgra(initial.B, initial.G, initial.R, alpha);
-        }
-
-        private static double GetShade(ColorBgra color)
-        {
-            return (color.R + color.G + color.B) / 3d;
         }
 
         private static ColorBgra Normalize(ColorBgra color)

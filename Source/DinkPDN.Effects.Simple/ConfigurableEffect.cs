@@ -98,12 +98,21 @@ namespace DinkPDN.Effects.Simple
                     control.SetPropertyControlValue(prop.Name, ControlInfoPropertyNames.DecimalPlaces, dblprop.Precision.GetValue(3));
                 }
             }
-
-            OnReady();
             return control;
         }
 
+        private readonly object ReadyLock = new object();
+        private bool _ready = false;
         protected virtual void OnReady() { }
+
+        protected override void OnRender(Rectangle[] renderRects, int startIndex, int length)
+        {
+            lock (ReadyLock) {
+                if (_ready) return;
+                _ready = true;
+                OnReady();
+            }
+        }
 
         protected abstract class ConfigurableAttribute : Attribute
         {

@@ -33,6 +33,7 @@ namespace DinkPDN.Effects.Simple
 
         protected override void OnRender(Rectangle[] renderRects, int startIndex, int length)
         {
+            base.OnRender(renderRects, startIndex, length);
             var source = SrcArgs.Surface;
             foreach (var rect in renderRects.Skip(startIndex).Take(length)) {
                 for (var y = rect.Top; y < rect.Bottom; y++) {
