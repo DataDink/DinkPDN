@@ -20,3 +20,8 @@ Please refer to the MIT license for more information.
 
 For instructions and more information please visit the PDN post: 
 [http://forums.getpaint.net](http://forums.getpaint.net/index.php?/topic/106104-color-cut/?view=findpost&p=509037)
+
+##[Blend Seams](https://raw.githubusercontent.com/DataDink/DinkPDN/master/Binaries/BlendSeams/Latest/BlendSeams.dll)
+*A tool for smoothing out sharp edges / making seamless textures.*
+
+For instructions and more information please visit the PDN post: 
