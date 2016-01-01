@@ -57,7 +57,7 @@ namespace BlendSeams
 
         private int Offset(int min, int value, int max) {
             value -= min; max -= min + 1;
-            return (value + max / 2) % max;
+            return ((value + max / 2) % max) + min;
         }
     }
 }
