@@ -25,3 +25,4 @@ For instructions and more information please visit the PDN post:
 *A tool for smoothing out sharp edges / making seamless textures.*
 
 For instructions and more information please visit the PDN post: 
+[http://forums.getpaint.net](http://forums.getpaint.net/index.php?/topic/106712-blend-seams-for-smoothing-out-pesky-seams-on-textures)
