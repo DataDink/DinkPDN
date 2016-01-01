@@ -59,7 +59,6 @@
   </ItemGroup>
   <Import Project="..\DinkPDN.Common\DinkPDN.Common.projitems" Label="Shared" />
   <Import Project="..\DinkPDN.Effects.Simple\DinkPDN.Effects.Simple.projitems" Label="Shared" />
-  <Import Project="..\DinkPDN.Plotting\DinkPDN.Plotting.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>copy $(TargetPath) "C:\Program Files\Paint.Net\Effects"</PostBuildEvent>
