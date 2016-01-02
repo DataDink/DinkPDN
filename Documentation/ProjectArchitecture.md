@@ -22,7 +22,16 @@ Unit test projects are unable to make reference to Shared Projects and so it is 
 
 ##Plugin Projects##
 Then general rule of thumb here is that one project should ultimately provide a single menu item in PDN.
+These projects should only reference core PDN libraries and DinkPDN Shared Projects.
+References should not be made to Shared Projects that will not be utilized by the plugin.
+This will help to ensure minimal bloat to the individual plugin assembly when compiled.
+
+##User Experience##
+All plugins should attempt to utilize existing UI components in order to provide a consistent and familiar experience for users.
+I will even allow a little bit of cheating at the expense of possible risk to compatability to keep a consistent user experience.
+While consistency is of high importance, plugin UI should strive to be self-explanatory. 
+A good goal to have is that a user doesn't need to seek out documentation / examples to use the plugin.
 I am not against incorporating complicated configurations, but would prefer that my plugins are less "Kitchen Sink" and more "Single Responsibility".
-I, personally, prefer plugins that do one job well and easily over plugins that try to do everything at the expense of complicating the primary function.
+I, personally, prefer plugins that do one job well and concisely over plugins that try to do everything at the expense of complicating the primary function.
 
 
