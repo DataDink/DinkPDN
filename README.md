@@ -13,6 +13,9 @@ Please refer to the MIT license for more information.
 - Place the plugin in the effects folder: (C:\Program Files\paint.net\Effects)
 - (Re)start Paint.net
 
+**Contributions**
+Interested in contributing? Please make sure to stop by the [documentation](https://github.com/DataDink/DinkPDN/blob/master/Documentation/README.md)
+
 ----------------------------------------------------------------------------------------------------------------------
 
 ##[Color Cut](https://raw.githubusercontent.com/DataDink/DinkPDN/master/Binaries/ColorCut/Latest/ColorCut.dll)
