@@ -6,6 +6,7 @@
   - [Shared Projects](https://github.com/DataDink/DinkPDN/blob/master/Documentation/ProjectArchitecture.md#shared-projects)
   - [Shared Project Unit Tests](https://github.com/DataDink/DinkPDN/blob/master/Documentation/ProjectArchitecture.md#shared-project-unit-tests)
   - [Plugin Projects](https://github.com/DataDink/DinkPDN/blob/master/Documentation/ProjectArchitecture.md#plugin-projects)
+  - [User Experience](https://github.com/DataDink/DinkPDN/blob/master/Documentation/ProjectArchitecture.md#user-experience)
 
 
 
