@@ -17,16 +17,19 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestAssembly", "TestAssembl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlendSeams", "BlendSeams\BlendSeams.csproj", "{1FFF7C5A-4F7D-4246-A576-0760AC6A0F7A}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "DinkPDN.UI", "DinkPDN.UI\DinkPDN.UI.shproj", "{46FC2D7A-7DB3-4EF1-9CD4-CD30872F33E9}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		DinkPDN.Common\DinkPDN.Common.projitems*{af2edc76-c2c1-4858-854c-edfba8f5f8b3}*SharedItemsImports = 13
-		DinkPDN.Effects.Simple\DinkPDN.Effects.Simple.projitems*{6ed22191-2c6e-4a24-81ff-c04aaf54c9d8}*SharedItemsImports = 4
 		DinkPDN.Common\DinkPDN.Common.projitems*{6ed22191-2c6e-4a24-81ff-c04aaf54c9d8}*SharedItemsImports = 4
+		DinkPDN.Effects.Simple\DinkPDN.Effects.Simple.projitems*{6ed22191-2c6e-4a24-81ff-c04aaf54c9d8}*SharedItemsImports = 4
 		DinkPDN.Plotting\DinkPDN.Plotting.projitems*{45058a81-4b9b-41b7-8427-9ce380c6a7bf}*SharedItemsImports = 4
 		DinkPDN.Effects.Simple\DinkPDN.Effects.Simple.projitems*{f0963c91-a917-494a-a6b8-ca13b285cf15}*SharedItemsImports = 13
+		DinkPDN.UI\DinkPDN.UI.projitems*{46fc2d7a-7db3-4ef1-9cd4-cd30872f33e9}*SharedItemsImports = 13
 		DinkPDN.Plotting\DinkPDN.Plotting.projitems*{1d2b493d-ee11-46c2-8105-cd53dafbb491}*SharedItemsImports = 13
-		DinkPDN.Effects.Simple\DinkPDN.Effects.Simple.projitems*{1fff7c5a-4f7d-4246-a576-0760ac6a0f7a}*SharedItemsImports = 4
 		DinkPDN.Common\DinkPDN.Common.projitems*{1fff7c5a-4f7d-4246-a576-0760ac6a0f7a}*SharedItemsImports = 4
+		DinkPDN.Effects.Simple\DinkPDN.Effects.Simple.projitems*{1fff7c5a-4f7d-4246-a576-0760ac6a0f7a}*SharedItemsImports = 4
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
