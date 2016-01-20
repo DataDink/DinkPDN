@@ -11,7 +11,7 @@ namespace ColorCut
         private double BgShade { get; set; } 
         private ColorBgra BgNormal { get; set; }
 
-        protected override void OnReady()
+        protected override void OnReady(RenderArgs src, RenderArgs dst)
         {
             BgColor = EnvironmentParameters.SecondaryColor;
             BgShade = BgColor.ToColor().GetBrightness();

@@ -11,28 +11,19 @@ using DinkPDN.Common;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Reflection;
+using DinkPDN.Effects.Simple;
 
 namespace Tile
 {
     [PluginSupportInfo(typeof(AssemblyPluginSupportInfo))]
-    public class Plugin : Effect
+    public class Plugin : ConfigurablePixelEffect
     {
-        public Plugin() : base("Test", new AssemblyPluginSupportInfo().Icon, "Test", EffectFlags.Configurable) {
-            var prop = new DoubleProperty("Test", 0d, 0d, 10d);
-            var info = PropertyControlInfo.CreateFor(prop);
-            info.SetPropertyControlValue("Test", ControlInfoPropertyNames.DisplayName, "Name");
-            info.SetPropertyControlValue("Test", ControlInfoPropertyNames.Description, "Desc");
+        [ConfigurableDouble(Name = "Test Test")]
+        public double Value { get; set; }
 
-            var win = new Form();
-            var control = (PropertyControl)info.CreateConcreteControl(win);
-            control.Dock = DockStyle.Fill;
-            win.Controls.Add((Control)control);
-            win.ShowDialog();
-        }
-
-        public override void Render(EffectConfigToken parameters, RenderArgs dstArgs, RenderArgs srcArgs, Rectangle[] rois, int startIndex, int length)
+        protected override ColorBgra RenderPixel(int x, int y, ColorBgra initial, Surface source)
         {
-
+            return ColorBgra.Black;
         }
     }
 }

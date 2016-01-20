@@ -26,9 +26,9 @@ namespace BlendSeams
             Default = 1d)]
         public double RadiusBlending { get; set; }
 
-        protected override void OnReady()
+        protected override void OnReady(RenderArgs src, RenderArgs dst)
         {
-            Bounds = EnvironmentParameters.GetSelection(SrcArgs.Bounds).GetBoundsInt();
+            Bounds = EnvironmentParameters.GetSelection(src.Bounds).GetBoundsInt();
             CenterX = Bounds.Left + Bounds.Width / 2;
             CenterY = Bounds.Top + Bounds.Height / 2;
         }

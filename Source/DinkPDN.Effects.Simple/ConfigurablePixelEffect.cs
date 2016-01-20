@@ -31,14 +31,13 @@ namespace DinkPDN.Effects.Simple
 
         protected ConfigurablePixelEffect(string name, Image image, string menu) : base(name, image, menu) { }
 
-        protected override void OnRender(Rectangle[] renderRects, int startIndex, int length)
+        protected override void RenderRects(Rectangle[] rects, RenderArgs dst, RenderArgs src)
         {
-            base.OnRender(renderRects, startIndex, length);
-            var source = SrcArgs.Surface;
-            foreach (var rect in renderRects.Skip(startIndex).Take(length)) {
+            var source = src.Surface;
+            foreach (var rect in rects) {
                 for (var y = rect.Top; y < rect.Bottom; y++) {
                     for (var x = rect.Left; x < rect.Right; x++) {
-                        DstArgs.Surface[x, y] = RenderPixel(x, y, source[x, y], source);
+                        dst.Surface[x, y] = RenderPixel(x, y, source[x, y], source);
                     }
                 }
             }

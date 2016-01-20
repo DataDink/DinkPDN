@@ -9,8 +9,16 @@
     <Import_RootNamespace>DinkPDN.Effects.Simple</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)ConfigurableAttribute.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ConfigurableBoolAttribute.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ConfigurableDoubleAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ConfigurableEffect.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ConfigurableImageAttribute.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ConfigurableIntAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ConfigurablePixelEffect.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ConfigurableSelectionAttribute.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ConfigurableStringAttribute.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ConfigurableVectorAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Views\" />
