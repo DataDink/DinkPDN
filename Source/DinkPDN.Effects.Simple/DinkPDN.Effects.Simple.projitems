@@ -12,4 +12,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)ConfigurableEffect.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ConfigurablePixelEffect.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)Views\" />
+  </ItemGroup>
 </Project>

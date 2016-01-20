@@ -24,7 +24,7 @@ namespace Tile
             info.SetPropertyControlValue("Test", ControlInfoPropertyNames.Description, "Desc");
 
             var win = new Form();
-            var control = (Control)info.CreateConcreteControl(win);
+            var control = (PropertyControl)info.CreateConcreteControl(win);
             control.Dock = DockStyle.Fill;
             win.Controls.Add((Control)control);
             win.ShowDialog();
