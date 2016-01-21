@@ -39,7 +39,7 @@ namespace DinkPDN.Effects.Simple
         private readonly Dictionary<PropertyInfo, ConfigurableAttribute> Properties;
         protected RenderArgs Source { get; private set; }
         protected RenderArgs Destination { get; private set; }
-        protected Rectangle[] Rects { get; private set; }
+        private Dialog EffectDialog { get; set; }
 
         protected BaseConfigurableEffect(string name, Image image, string menu) : base(name, image, menu, EffectFlags.Configurable) {
             Properties = GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance)
@@ -51,14 +51,14 @@ namespace DinkPDN.Effects.Simple
         protected virtual void OnPropertyChanged(PropertyInfo property, object oldValue, object newValue)
         {
             if (PropertyChanged != null) PropertyChanged(this, new PropertyChangedEventArgs(property.Name));
-            RenderRects(Rects, Destination, Source);
+            EffectDialog.TriggerUpdate();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
         public override EffectConfigDialog CreateConfigDialog()
         {
-            var dlg = new Dialog();
+            EffectDialog = new Dialog() { Effect = this, Text = this.Name };
             foreach (var kvp in Properties) {
                 var prop = kvp.Key;
                 var attr = kvp.Value;
@@ -69,33 +69,75 @@ namespace DinkPDN.Effects.Simple
                     OnPropertyChanged(prop, oldvalue, control.Property.Value);
                 };
                 control.Dock = DockStyle.Top;
-                dlg.Controls.Add(control);
+                EffectDialog.Controls.Add(control);
                 control.SendToBack();
             }
-            return dlg;
+            return EffectDialog;
         }
 
+        protected override void OnSetRenderInfo(EffectConfigToken parameters, RenderArgs dstArgs, RenderArgs srcArgs)
+        {
+            if (!_ready) {
+                _ready = true;
+                Source = srcArgs;
+                Destination = dstArgs;
+                OnReady(srcArgs, dstArgs);
+            }
+            base.OnSetRenderInfo(parameters, dstArgs, srcArgs);
+        }
+
+        private bool _ready;
         protected virtual void OnReady(RenderArgs src, RenderArgs dst) { }
 
         public override void Render(EffectConfigToken parameters, RenderArgs dstArgs, RenderArgs srcArgs, Rectangle[] rois, int startIndex, int length)
         {
-            Source = srcArgs;
-            Destination = dstArgs;
-            Rects = rois.Skip(startIndex).Take(length).ToArray();
-            OnReady(Source, Destination);
-
-            RenderRects(Rects, Destination, Source);
+            Render(rois.Skip(startIndex).Take(length).ToArray(), Destination, Source);
         }
 
-        protected abstract void RenderRects(Rectangle[] rects, RenderArgs dst, RenderArgs src);
+        protected abstract void Render(Rectangle[] rects, RenderArgs dst, RenderArgs src);
+
+        protected override void OnDispose(bool disposing)
+        {
+            if (EffectDialog != null) EffectDialog.Dispose();
+            base.OnDispose(disposing);
+        }
 
         private class Dialog : EffectConfigDialog {
+            private readonly Panel Footer = new Panel { Dock = DockStyle.Bottom, Padding = new Padding(0, 15, 0, 0), Height = 55 };
+            private readonly Button OK = new Button { Text = "OK", Dock = DockStyle.Right };
+            private readonly Button Cancel = new Button { Text = "Cancel", Dock = DockStyle.Right };
+
             public Dialog()
             {
+                EffectToken = new Token();
+                Padding = new Padding(5, 10, 5, 10);
                 AutoSize = true;
                 AutoSizeMode = AutoSizeMode.GrowOnly;
-                MinimumSize = new Size(400, 200);
+                Size = new Size(450, 0);
+                Controls.Add(Footer);
+                BackColor = Color.White;
+                Footer.Controls.Add(OK);
+                Footer.Controls.Add(new Label { BorderStyle = BorderStyle.None, Width = 10, Dock = DockStyle.Right });
+                Footer.Controls.Add(Cancel);
+                Footer.Controls.Add(new Label { BorderStyle = BorderStyle.None, Height = 10, Dock = DockStyle.Top });
+                Footer.Controls.Add(new Label { BorderStyle = BorderStyle.Fixed3D, Height = 2, Dock = DockStyle.Top });
+
+                Cancel.Click += (s, e) => { DialogResult = DialogResult.Cancel; Close(); };
+                OK.Click += (s, e) => { DialogResult = DialogResult.OK; Close(); };
             }
+
+            public void TriggerUpdate()
+            {
+                OnEffectTokenChanged();
+            }
+
+            protected override void OnControlAdded(ControlEventArgs e)
+            {
+                base.OnControlAdded(e);
+                Footer.BringToFront();
+            }
+
+            private class Token : EffectConfigToken { public override object Clone() { return new Token(); } }
         }
     }
 }

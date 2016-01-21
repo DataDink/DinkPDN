@@ -31,7 +31,7 @@ namespace DinkPDN.Effects.Simple
 
         protected ConfigurablePixelEffect(string name, Image image, string menu) : base(name, image, menu) { }
 
-        protected override void RenderRects(Rectangle[] rects, RenderArgs dst, RenderArgs src)
+        protected override void Render(Rectangle[] rects, RenderArgs dst, RenderArgs src)
         {
             var source = src.Surface;
             foreach (var rect in rects) {

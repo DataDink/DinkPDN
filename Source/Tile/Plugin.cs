@@ -16,14 +16,25 @@ using DinkPDN.Effects.Simple;
 namespace Tile
 {
     [PluginSupportInfo(typeof(AssemblyPluginSupportInfo))]
-    public class Plugin : ConfigurablePixelEffect
+    public class Plugin : ConfigurableEffect
     {
         [ConfigurableDouble(Name = "Test Test")]
         public double Value { get; set; }
 
-        protected override ColorBgra RenderPixel(int x, int y, ColorBgra initial, Surface source)
+        private readonly Random Rnd = new Random();
+
+        protected override void Render(Rectangle[] rects, RenderArgs dst, RenderArgs src)
         {
-            return ColorBgra.Black;
+            foreach (var rect in rects) 
+                for (var y = rect.Top; y < rect.Bottom; y++) 
+                    for (var x = rect.Left; x < rect.Right; x++) {
+                        var color = ColorBgra.FromBgra(
+                            (byte)(Rnd.Next(255)),
+                            (byte)(Rnd.Next(255)),
+                            (byte)(Rnd.Next(255)),
+                            (byte)(Rnd.Next(255)));
+                        src.Surface[x, y] = color;
+                    }
         }
     }
 }
