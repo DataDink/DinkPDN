@@ -71,7 +71,6 @@ namespace DinkPDN.Effects.Simple
                 }
                 control.Dock = DockStyle.Top;
                 EffectDialog.Controls.Add(control);
-                control.SendToBack();
             }
             return EffectDialog;
         }
@@ -105,7 +104,7 @@ namespace DinkPDN.Effects.Simple
         }
 
         private class Dialog : EffectConfigDialog {
-            private readonly Panel Footer = new Panel { Dock = DockStyle.Bottom, Padding = new Padding(0, 15, 0, 0), Height = 55 };
+            private readonly Panel Footer = new Panel { Dock = DockStyle.Bottom, Height = 40 };
             private readonly Button OK = new Button { Text = "OK", Dock = DockStyle.Right };
             private readonly Button Cancel = new Button { Text = "Cancel", Dock = DockStyle.Right };
 
@@ -116,8 +115,9 @@ namespace DinkPDN.Effects.Simple
                 AutoSize = true;
                 AutoSizeMode = AutoSizeMode.GrowOnly;
                 Size = new Size(450, 0);
-                Controls.Add(Footer);
                 BackColor = Color.White;
+
+                Controls.Add(Footer);
                 Footer.Controls.Add(OK);
                 Footer.Controls.Add(new Label { BorderStyle = BorderStyle.None, Width = 10, Dock = DockStyle.Right });
                 Footer.Controls.Add(Cancel);
@@ -133,10 +133,18 @@ namespace DinkPDN.Effects.Simple
                 OnEffectTokenChanged();
             }
 
+            private bool _suspend;
             protected override void OnControlAdded(ControlEventArgs e)
             {
                 base.OnControlAdded(e);
+                if (_suspend) return;
+                _suspend = true;
+                e.Control.BringToFront();
+                var margin = new Panel { Dock = DockStyle.Top, Height = 15 };
+                Controls.Add(margin);
+                margin.BringToFront();
                 Footer.BringToFront();
+                _suspend = false;
             }
 
             private class Token : EffectConfigToken { public override object Clone() { return new Token(); } }

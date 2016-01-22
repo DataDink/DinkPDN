@@ -20,8 +20,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)ConfigurableSelectionAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ConfigurableStringAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ConfigurableVectorAttribute.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)Views\" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\FilePropertyControl.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\PropertyControl.cs" />
   </ItemGroup>
 </Project>
