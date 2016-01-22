@@ -69,6 +69,7 @@ namespace DinkPDN.Effects.Simple
                 if (defaulted != null && defaulted.Default != null) {
                     prop.SetValue(this, defaulted.Default);
                 }
+                control.Dock = DockStyle.Top;
                 EffectDialog.Controls.Add(control);
             }
             return EffectDialog;
@@ -103,7 +104,7 @@ namespace DinkPDN.Effects.Simple
         }
 
         private class Dialog : EffectConfigDialog {
-            private readonly Panel Footer = new Panel { Dock = DockStyle.Bottom, Height = 40 };
+            private readonly Panel Footer = new Panel { Dock = DockStyle.Top, Height = 40 };
             private readonly Button OK = new Button { Text = "OK", Dock = DockStyle.Right };
             private readonly Button Cancel = new Button { Text = "Cancel", Dock = DockStyle.Right };
 
@@ -111,9 +112,10 @@ namespace DinkPDN.Effects.Simple
             {
                 EffectToken = new Token();
                 Padding = new Padding(5, 10, 5, 10);
+                Size = new Size(450, 0);
+                MinimumSize = Size;
                 AutoSize = true;
                 AutoSizeMode = AutoSizeMode.GrowOnly;
-                Size = new Size(450, 0);
                 BackColor = Color.White;
 
                 Controls.Add(Footer);
@@ -135,6 +137,7 @@ namespace DinkPDN.Effects.Simple
             private bool _suspend;
             protected override void OnControlAdded(ControlEventArgs e)
             {
+
                 base.OnControlAdded(e);
                 if (_suspend || e.Control == Footer) return;
                 _suspend = true;
@@ -144,6 +147,8 @@ namespace DinkPDN.Effects.Simple
                 var margin = new Panel { Dock = DockStyle.Top, Height = 15 };
                 Controls.Add(margin);
                 margin.BringToFront();
+
+                Footer.BringToFront();
                 _suspend = false;
             }
 
