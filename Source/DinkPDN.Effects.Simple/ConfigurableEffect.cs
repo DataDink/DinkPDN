@@ -69,7 +69,6 @@ namespace DinkPDN.Effects.Simple
                 if (defaulted != null && defaulted.Default != null) {
                     prop.SetValue(this, defaulted.Default);
                 }
-                control.Dock = DockStyle.Top;
                 EffectDialog.Controls.Add(control);
             }
             return EffectDialog;
@@ -137,13 +136,14 @@ namespace DinkPDN.Effects.Simple
             protected override void OnControlAdded(ControlEventArgs e)
             {
                 base.OnControlAdded(e);
-                if (_suspend) return;
+                if (_suspend || e.Control == Footer) return;
                 _suspend = true;
+                e.Control.Dock = DockStyle.Top;
                 e.Control.BringToFront();
+
                 var margin = new Panel { Dock = DockStyle.Top, Height = 15 };
                 Controls.Add(margin);
                 margin.BringToFront();
-                Footer.BringToFront();
                 _suspend = false;
             }
 

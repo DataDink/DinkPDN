@@ -12,6 +12,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Reflection;
 using DinkPDN.Effects.Simple;
+using DinkPDN.Effects.UI;
 
 namespace Tile
 {
@@ -55,7 +56,8 @@ namespace Tile
         public bool VerticalMirror { get; set; }
 
         [ConfigurableFile(
-            Name = "Load From Disk"
+            Name = "Load From Disk",
+            Description = "Test"
         )]
         public string FilePath { get; set; }
 

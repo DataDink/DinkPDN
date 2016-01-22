@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>9bd22691-f10a-4534-a801-61d2e4a2a1db</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>DinkPDN.Effects.UI</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)ConfigurableFileAttribute.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\FilePropertyControl.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\PropertyControl.cs" />
+  </ItemGroup>
+</Project>
