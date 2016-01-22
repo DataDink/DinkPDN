@@ -18,23 +18,49 @@ namespace Tile
     [PluginSupportInfo(typeof(AssemblyPluginSupportInfo))]
     public class Plugin : ConfigurableEffect
     {
-        [ConfigurableDouble(Name = "Test Test")]
-        public double Value { get; set; }
+        private Surface Source { get; set; }
 
-        private readonly Random Rnd = new Random();
+        [ConfigurableDouble(
+            Name = "Horizontal Scale",
+            Description = "Set this to 0 to maintain aspect with Vertical Scale"
+        )]
+        public double HorizontalScale { get; set; }
+
+        [ConfigurableDouble(
+            Name = "Vertical Scale",
+            Description = "Set this to 0 to maintain aspect with Horizontal Scale"
+        )]
+        public double VerticalScale { get; set; }
+
+        [ConfigurableDouble(
+            Name = "Horizontal Offset",
+            Default = 0d
+        )]
+        public double HorizontalOffset { get; set; }
+
+        [ConfigurableDouble(
+            Name = "Vertical Offset",
+            Default = 0d
+        )]
+        public double VerticalOffset { get; set; }
+
+        [ConfigurableBool(
+            Name = "Mirror Horizontal"
+        )]
+        public bool HorizontalMirror { get; set; }
+
+        [ConfigurableBool(
+            Name = "Mirror Vertical"
+        )]
+        public bool VerticalMirror { get; set; }
+
+        [ConfigurableFile(
+            Name = "Load From Disk"
+        )]
+        public string FilePath { get; set; }
 
         protected override void Render(Rectangle[] rects, RenderArgs dst, RenderArgs src)
         {
-            foreach (var rect in rects) 
-                for (var y = rect.Top; y < rect.Bottom; y++) 
-                    for (var x = rect.Left; x < rect.Right; x++) {
-                        var color = ColorBgra.FromBgra(
-                            (byte)(Rnd.Next(255)),
-                            (byte)(Rnd.Next(255)),
-                            (byte)(Rnd.Next(255)),
-                            (byte)(Rnd.Next(255)));
-                        src.Surface[x, y] = color;
-                    }
         }
     }
 }

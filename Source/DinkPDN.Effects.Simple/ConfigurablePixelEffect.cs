@@ -31,18 +31,18 @@ namespace DinkPDN.Effects.Simple
 
         protected ConfigurablePixelEffect(string name, Image image, string menu) : base(name, image, menu) { }
 
-        protected override void Render(Rectangle[] rects, RenderArgs dst, RenderArgs src)
+        protected sealed override void Render(Rectangle[] rects, RenderArgs dst, RenderArgs src)
         {
             var source = src.Surface;
             foreach (var rect in rects) {
                 for (var y = rect.Top; y < rect.Bottom; y++) {
                     for (var x = rect.Left; x < rect.Right; x++) {
-                        dst.Surface[x, y] = RenderPixel(x, y, source[x, y], source);
+                        dst.Surface[x, y] = Render(x, y, source[x, y], source);
                     }
                 }
             }
         }
 
-        protected abstract ColorBgra RenderPixel(int x, int y, ColorBgra initial, Surface source);
+        protected abstract ColorBgra Render(int x, int y, ColorBgra initial, Surface source);
     }
 }

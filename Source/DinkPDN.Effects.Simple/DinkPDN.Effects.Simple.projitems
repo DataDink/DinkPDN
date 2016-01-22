@@ -13,6 +13,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)ConfigurableBoolAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ConfigurableDoubleAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ConfigurableEffect.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ConfigurableFileAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ConfigurableImageAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ConfigurableIntAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ConfigurablePixelEffect.cs" />

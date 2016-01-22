@@ -37,7 +37,7 @@ namespace ColorCut
             Default = 0.5d)]
         public double AlphaFalloff { get; set; }
 
-        protected override ColorBgra RenderPixel(int x, int y, ColorBgra initial, Surface source)
+        protected override ColorBgra Render(int x, int y, ColorBgra initial, Surface source)
         {
             var shade = initial.ToColor().GetBrightness();
             if (Math.Abs(shade - BgShade) > ShadeThreshold) return initial;

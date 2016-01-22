@@ -35,10 +35,7 @@ namespace DinkPDN.Effects.Simple
 
     public abstract class BaseConfigurableEffect : Effect, INotifyPropertyChanged
     {
-        private readonly Type Type;
         private readonly Dictionary<PropertyInfo, ConfigurableAttribute> Properties;
-        protected RenderArgs Source { get; private set; }
-        protected RenderArgs Destination { get; private set; }
         private Dialog EffectDialog { get; set; }
 
         protected BaseConfigurableEffect(string name, Image image, string menu) : base(name, image, menu, EffectFlags.Configurable) {
@@ -68,6 +65,10 @@ namespace DinkPDN.Effects.Simple
                     prop.SetValue(this, control.Property.Value);
                     OnPropertyChanged(prop, oldvalue, control.Property.Value);
                 };
+                var defaulted = attr as DefaultConfigurableAttribute;
+                if (defaulted != null && defaulted.Default != null) {
+                    prop.SetValue(this, defaulted.Default);
+                }
                 control.Dock = DockStyle.Top;
                 EffectDialog.Controls.Add(control);
                 control.SendToBack();
@@ -77,21 +78,22 @@ namespace DinkPDN.Effects.Simple
 
         protected override void OnSetRenderInfo(EffectConfigToken parameters, RenderArgs dstArgs, RenderArgs srcArgs)
         {
+            lock(_readylock)
             if (!_ready) {
                 _ready = true;
-                Source = srcArgs;
-                Destination = dstArgs;
+                // Any future prep should go / be called here
                 OnReady(srcArgs, dstArgs);
             }
             base.OnSetRenderInfo(parameters, dstArgs, srcArgs);
         }
 
         private bool _ready;
+        private readonly object _readylock = new object();
         protected virtual void OnReady(RenderArgs src, RenderArgs dst) { }
 
-        public override void Render(EffectConfigToken parameters, RenderArgs dstArgs, RenderArgs srcArgs, Rectangle[] rois, int startIndex, int length)
+        public sealed override void Render(EffectConfigToken parameters, RenderArgs dstArgs, RenderArgs srcArgs, Rectangle[] rois, int startIndex, int length)
         {
-            Render(rois.Skip(startIndex).Take(length).ToArray(), Destination, Source);
+            Render(rois.Skip(startIndex).Take(length).ToArray(), dstArgs, srcArgs);
         }
 
         protected abstract void Render(Rectangle[] rects, RenderArgs dst, RenderArgs src);

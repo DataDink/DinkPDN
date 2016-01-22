@@ -33,7 +33,7 @@ namespace BlendSeams
             CenterY = Bounds.Top + Bounds.Height / 2;
         }
         
-        protected override ColorBgra RenderPixel(int x, int y, ColorBgra initial, Surface source)
+        protected override ColorBgra Render(int x, int y, ColorBgra initial, Surface source)
         {
             var targetA = source[Offset(Bounds.Left, x, Bounds.Right), y];
             initial = initial.Blend(targetA, GetBorderBlendValue(Bounds.Left, x, Bounds.Right));
