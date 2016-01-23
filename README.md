@@ -21,11 +21,15 @@ Interested in contributing? Please make sure to stop by the [documentation](http
 ##[Color Cut](https://raw.githubusercontent.com/DataDink/DinkPDN/master/Binaries/ColorCut/Latest/ColorCut.dll)
 *A tool for removing background colors.*
 
-For instructions and more information please visit the PDN post: 
-[http://forums.getpaint.net](http://forums.getpaint.net/index.php?/topic/106104-color-cut/?view=findpost&p=509037)
+[More Info](http://forums.getpaint.net/index.php?/topic/106104-color-cut/?view=findpost&p=509037)
 
 ##[Blend Seams](https://raw.githubusercontent.com/DataDink/DinkPDN/master/Binaries/BlendSeams/Latest/BlendSeams.dll)
 *A tool for smoothing out sharp edges / making seamless textures.*
 
-For instructions and more information please visit the PDN post: 
-[http://forums.getpaint.net](http://forums.getpaint.net/index.php?/topic/106712-blend-seams-for-smoothing-out-pesky-seams-on-textures)
+[More Info](http://forums.getpaint.net/index.php?/topic/106712-blend-seams-for-smoothing-out-pesky-seams-on-textures)
+
+##[Tile](https://raw.githubusercontent.com/DataDink/DinkPDN/master/Binaries/Tile/Latest/Tile.dll)
+*A tool for repeating / tiling samples*
+
+[More Info](http://forums.getpaint.net/index.php?/topic/)
+
