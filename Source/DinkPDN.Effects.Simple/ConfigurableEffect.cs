@@ -68,6 +68,8 @@ namespace DinkPDN.Effects.Simple
                 var defaulted = attr as DefaultConfigurableAttribute;
                 if (defaulted != null && defaulted.Default != null) {
                     prop.SetValue(this, defaulted.Default);
+                } else if (control.Property.Value != null) {
+                    prop.SetValue(this, control.Property.Value);
                 }
                 control.Dock = DockStyle.Top;
                 EffectDialog.Controls.Add(control);
@@ -115,7 +117,7 @@ namespace DinkPDN.Effects.Simple
                 Size = new Size(450, 0);
                 MinimumSize = Size;
                 AutoSize = true;
-                AutoSizeMode = AutoSizeMode.GrowOnly;
+                AutoSizeMode = AutoSizeMode.GrowAndShrink;
                 BackColor = Color.White;
 
                 Controls.Add(Footer);

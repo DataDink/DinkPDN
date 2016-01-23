@@ -61,6 +61,9 @@
     <Compile Include="Plugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="icon.png" />
+  </ItemGroup>
   <Import Project="..\DinkPDN.Common\DinkPDN.Common.projitems" Label="Shared" />
   <Import Project="..\DinkPDN.Effects.Simple\DinkPDN.Effects.Simple.projitems" Label="Shared" />
   <Import Project="..\DinkPDN.Effects.UI\DinkPDN.Effects.UI.projitems" Label="Shared" />
