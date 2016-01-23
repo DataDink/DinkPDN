@@ -31,5 +31,5 @@ Interested in contributing? Please make sure to stop by the [documentation](http
 ##[Tile](https://raw.githubusercontent.com/DataDink/DinkPDN/master/Binaries/Tile/Latest/Tile.dll)
 *A tool for repeating / tiling samples*
 
-[More Info](http://forums.getpaint.net/index.php?/topic/)
+[More Info](http://forums.getpaint.net/index.php?/topic/107032-tile/)
 
