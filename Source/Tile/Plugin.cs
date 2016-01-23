@@ -17,18 +17,8 @@ using DinkPDN.Effects.UI;
 namespace Tile
 {
     [PluginSupportInfo(typeof(AssemblyPluginSupportInfo))]
-    public class Plugin : ConfigurableEffect
+    public class Plugin : ConfigurablePixelEffect
     {
-        public Plugin() : base("Fill") { }
-
-        private Image Source { get; set; }
-
-        private void SetSource(Image source)
-        {
-            if (Source != null) Source.Dispose();
-            Source = source;
-        }
-
         [ConfigurableDouble(
             Name = "Horizontal Scale",
             Description = "Set this to 0 to maintain aspect with Vertical Scale"
@@ -63,7 +53,37 @@ namespace Tile
         )]
         public string FilePath { get; set; }
 
-        protected override void Render(Rectangle[] rects, RenderArgs dst, RenderArgs src) { }
+        public Plugin() : base("Fill") { }
+
+        private readonly object SourceLock = new object();
+
+        private Image _tileSource;
+        private Image TileSource
+        {
+            get { return _tileSource; }
+            set
+            {
+                lock(SourceLock) {
+                    if (_tileSource != null) _tileSource.Dispose();
+                    _tileSource = value;
+                }
+            }
+        }
+
+        private Surface _renderSource;
+        private Surface RenderSource
+        {
+            get { return _renderSource; }
+            set
+            {
+                lock (SourceLock) {
+                    if (_renderSource != null) _renderSource.Dispose();
+                    _renderSource = value;
+                }
+            }
+        }
+
+        private Rectangle Bounds { get; set; }
 
         protected override void OnPropertyChanged(PropertyInfo property, object oldValue, object newValue)
         {
@@ -72,51 +92,56 @@ namespace Tile
             base.OnPropertyChanged(property, oldValue, newValue);
         }
 
-        private void LoadFile() { try { SetSource(Image.FromFile(FilePath)); } catch { SetSource(null); } }
+        private void LoadFile() { try { TileSource = Image.FromFile(FilePath); } catch { TileSource = null; } }
 
         private void LoadClipboard()
         {
             if (UseClipboard) {
-                try { SetSource(Clipboard.GetImage()); } catch { SetSource(null); }
-            } else { SetSource(null); }
-            if (Source == null) LoadFile();
+                try { TileSource = Clipboard.GetImage(); } catch { TileSource = null; }
+            } else { TileSource = null; }
+            if (TileSource == null) LoadFile();
         }
 
         protected override void OnSetRenderInfo(EffectConfigToken parameters, RenderArgs dstArgs, RenderArgs srcArgs)
         {
             base.OnSetRenderInfo(parameters, dstArgs, srcArgs);
-            var bounds = EnvironmentParameters.GetSelection(srcArgs.Bounds).GetBoundsInt();
 
-            if (Source == null) {
-                Source = new Bitmap(bounds.Width, bounds.Height);
-                using (var gfx = Graphics.FromImage(Source)) {
-                    gfx.DrawImage(srcArgs.Bitmap, -bounds.X, -bounds.Y);
+            Bounds = EnvironmentParameters.GetSelection(srcArgs.Bounds).GetBoundsInt();
+            dstArgs.Graphics.CompositingMode = System.Drawing.Drawing2D.CompositingMode.SourceCopy;
+
+            if (TileSource == null) {
+                TileSource = new Bitmap(Bounds.Width, Bounds.Height);
+                using (var gfx = Graphics.FromImage(TileSource)) {
+                    gfx.DrawImage(srcArgs.Bitmap, -Bounds.X, -Bounds.Y);
                 }
             }
 
             var tileWidth = Math.Max(1, HorizontalScale > 0
-                ? HorizontalScale * bounds.Width
-                : VerticalScale == 0 ? Source.Width
-                : bounds.Width * (VerticalScale * bounds.Height) / bounds.Height);
+                ? HorizontalScale * Bounds.Width
+                : VerticalScale == 0 ? TileSource.Width
+                : Bounds.Width * (VerticalScale * Bounds.Height) / Bounds.Height);
             var tileHeight = Math.Max(1, VerticalScale > 0
-                ? VerticalScale * bounds.Height
-                : HorizontalScale == 0 ? Source.Height
-                : bounds.Height * (HorizontalScale * bounds.Width) / bounds.Width);
+                ? VerticalScale * Bounds.Height
+                : HorizontalScale == 0 ? TileSource.Height
+                : Bounds.Height * (HorizontalScale * Bounds.Width) / Bounds.Width);
             var startX = HorizontalOffset == 0 ? 0 : tileWidth * HorizontalOffset - tileWidth;
             var startY = VerticalOffset == 0 ? 0 : tileHeight * VerticalOffset - tileHeight;
 
-            using (var scaled = new Bitmap(Source, (int)tileWidth, (int)tileHeight))
-            using (var result = new Bitmap(bounds.Width, bounds.Height))
+            using (var scaled = new Bitmap(TileSource, (int)tileWidth, (int)tileHeight))
+            using (var result = new Bitmap(Bounds.Width, Bounds.Height))
             using (var gfx = Graphics.FromImage(result)) {
-                dstArgs.Graphics.CompositingMode = gfx.CompositingMode = System.Drawing.Drawing2D.CompositingMode.SourceCopy;
-                dstArgs.Graphics.FillRectangle(Brushes.Transparent, bounds);
                 for (var y = (int)startY; y < result.Height; y += (int)tileHeight)
                     for (var x = (int)startX; x < result.Width; x += (int)tileWidth) {
                         gfx.DrawImage(scaled, x, y);
                     }
-                dstArgs.Graphics.DrawImage(result, bounds.Left, bounds.Top);
+                RenderSource = Surface.CopyFromBitmap(result);
             }
 
+        }
+
+        protected override ColorBgra Render(int x, int y, ColorBgra initial, Surface source)
+        {
+            return RenderSource[x - Bounds.Left, y - Bounds.Top];
         }
     }
 }
