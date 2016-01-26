@@ -14,7 +14,7 @@ using System.Reflection;
 using DinkPDN.Effects.Simple;
 using DinkPDN.Effects.UI;
 
-namespace Tile
+namespace TileRadial
 {
     public class Plugin : ConfigurablePixelEffect
     {
@@ -31,16 +31,27 @@ namespace Tile
         public double VerticalScale { get; set; }
 
         [ConfigurableDouble(
-            Name = "Horizontal Offset",
-            Default = 0d
+            Name = "Start Angle",
+            Default = 0d,
+            Min = 0d, Max = 360d
         )]
-        public double HorizontalOffset { get; set; }
+        public double StartAngle { get; set; }
 
         [ConfigurableDouble(
-            Name = "Vertical Offset",
-            Default = 0d
+            Name = "Angle Step",
+            Default = 45d,
+            Min = .01d, Max = 360d
         )]
-        public double VerticalOffset { get; set; }
+        public double AngleStep { get; set; }
+
+        [ConfigurableDouble]
+        public double Radius { get; set; }
+
+        [ConfigurableBool(
+            Name = "Ignore Tile Shape",
+            Description = "The radius will ignore the tile height/width ratio"
+        )]
+        public bool IgnoreTileShape { get; set; }
 
         [ConfigurableBool(
             Name = "From Clipboard"
@@ -141,13 +152,6 @@ namespace Tile
         protected override ColorBgra Render(int x, int y, ColorBgra initial, Surface source)
         {
             return RenderSource[x - Bounds.Left, y - Bounds.Top];
-        }
-
-        protected override void OnDispose(bool disposing)
-        {
-            TileSource = null;
-            RenderSource = null;
-            base.OnDispose(disposing);
         }
     }
 }

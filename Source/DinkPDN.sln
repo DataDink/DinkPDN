@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tile", "Tile\Tile.csproj", 
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "DinkPDN.Effects.UI", "DinkPDN.Effects.UI\DinkPDN.Effects.UI.shproj", "{9BD22691-F10A-4534-A801-61D2E4A2A1DB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TileRadial", "TileRadial\TileRadial.csproj", "{99F539D1-D4D9-49CA-8806-734C66AB0487}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		DinkPDN.Common\DinkPDN.Common.projitems*{af2edc76-c2c1-4858-854c-edfba8f5f8b3}*SharedItemsImports = 13
@@ -28,10 +30,13 @@ Global
 		DinkPDN.Effects.Simple\DinkPDN.Effects.Simple.projitems*{6ed22191-2c6e-4a24-81ff-c04aaf54c9d8}*SharedItemsImports = 4
 		DinkPDN.Plotting\DinkPDN.Plotting.projitems*{45058a81-4b9b-41b7-8427-9ce380c6a7bf}*SharedItemsImports = 4
 		DinkPDN.Effects.Simple\DinkPDN.Effects.Simple.projitems*{f0963c91-a917-494a-a6b8-ca13b285cf15}*SharedItemsImports = 13
-		DinkPDN.Common\DinkPDN.Common.projitems*{d11538fe-9b1a-4617-bd9b-a2dd64250a98}*SharedItemsImports = 4
 		DinkPDN.Effects.UI\DinkPDN.Effects.UI.projitems*{d11538fe-9b1a-4617-bd9b-a2dd64250a98}*SharedItemsImports = 4
+		DinkPDN.Common\DinkPDN.Common.projitems*{d11538fe-9b1a-4617-bd9b-a2dd64250a98}*SharedItemsImports = 4
 		DinkPDN.Effects.Simple\DinkPDN.Effects.Simple.projitems*{d11538fe-9b1a-4617-bd9b-a2dd64250a98}*SharedItemsImports = 4
 		DinkPDN.Effects.UI\DinkPDN.Effects.UI.projitems*{9bd22691-f10a-4534-a801-61d2e4a2a1db}*SharedItemsImports = 13
+		DinkPDN.Effects.UI\DinkPDN.Effects.UI.projitems*{99f539d1-d4d9-49ca-8806-734c66ab0487}*SharedItemsImports = 4
+		DinkPDN.Common\DinkPDN.Common.projitems*{99f539d1-d4d9-49ca-8806-734c66ab0487}*SharedItemsImports = 4
+		DinkPDN.Effects.Simple\DinkPDN.Effects.Simple.projitems*{99f539d1-d4d9-49ca-8806-734c66ab0487}*SharedItemsImports = 4
 		DinkPDN.Plotting\DinkPDN.Plotting.projitems*{1d2b493d-ee11-46c2-8105-cd53dafbb491}*SharedItemsImports = 13
 		DinkPDN.Common\DinkPDN.Common.projitems*{1fff7c5a-4f7d-4246-a576-0760ac6a0f7a}*SharedItemsImports = 4
 		DinkPDN.Effects.Simple\DinkPDN.Effects.Simple.projitems*{1fff7c5a-4f7d-4246-a576-0760ac6a0f7a}*SharedItemsImports = 4
@@ -61,6 +66,10 @@ Global
 		{D11538FE-9B1A-4617-BD9B-A2DD64250A98}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D11538FE-9B1A-4617-BD9B-A2DD64250A98}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D11538FE-9B1A-4617-BD9B-A2DD64250A98}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99F539D1-D4D9-49CA-8806-734C66AB0487}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99F539D1-D4D9-49CA-8806-734C66AB0487}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99F539D1-D4D9-49CA-8806-734C66AB0487}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99F539D1-D4D9-49CA-8806-734C66AB0487}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
