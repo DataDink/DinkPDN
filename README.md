@@ -1,3 +1,5 @@
+*NOTE: Plugin making is on hold for me right now until I can devote more time to certain issues.*
+
 # DinkPDN
 *Dink's collection of PaintDotNet plugins*
 
